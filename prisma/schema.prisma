@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  username  String
+  onboarded Boolean   @default(false)
+  bio       String?
+  image     String?
+  lists     List[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model List {
+  id        String     @id @default(cuid())
+  title     String
+  summary   String?
+  games     ListGame[]
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime?  @updatedAt
+}
+
+model Game {
+  id                  Int        @id
+  category            Int
+  cover               Int
+  created_at          Int
+  external_games      Int[]
+  first_release_date  Int
+  game_modes          Int[]
+  genres              Int[]
+  involved_companies  Int[]
+  keywords            Int[]
+  name                String
+  platforms           Int[]
+  player_perspectives Int[]
+  release_dates       Int[]
+  screenshots         Int[]
+  similar_games       Int[]
+  slug                String
+  summary             String
+  tags                Int[]
+  themes              Int[]
+  updated_at          Int
+  url                 String
+  websites            Int[]
+  checksum            String
+  language_supports   Int[]
+  lists               ListGame[]
+}
+
+model ListGame {
+  listId String
+  gameId Int
+  list   List   @relation(fields: [listId], references: [id])
+  game   Game   @relation(fields: [gameId], references: [id])
+
+  @@id([listId, gameId])
+}

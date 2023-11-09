@@ -1,48 +1,19 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
 import MobileMenu from "./MobileMenu";
-import { useState } from "react";
-import NavProfile from "./NavProfile";
+import DesktopMenu from "./DesktopMenu";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { currentUser } from "@clerk/nextjs";
 
-const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+const Navbar = async () => {
+  const user = await currentUser();
+
+  const userData = user ? await fetchUser(user?.id) : null;
   return (
-    <nav className=" py-7 px-14 bg-dark-2 transition-all text-light-1">
-      <div className="flex items-center justify-between">
-        <Link href={"/"}>
-          <Image src={"/assets/logo.png"} alt="logo" width={100} height={100} />
-        </Link>
-
-        <div>
-          <Image
-            src="/assets/burger-menu.svg"
-            alt="burger-menu"
-            width={36}
-            height={36}
-            className={`${
-              openMenu ? "hidden" : "block"
-            } cursor-pointer sm:hidden`}
-            onClick={() => setOpenMenu(!openMenu)}
-          />
-          <Image
-            src="/assets/close.svg"
-            alt="burger-menu"
-            width={36}
-            height={36}
-            className={`${
-              !openMenu ? "hidden" : "block"
-            } cursor-pointer sm:hidden`}
-            onClick={() => setOpenMenu(!openMenu)}
-          />
-          <NavProfile />
-        </div>
-      </div>
-      <div className="sm:hidden mt-6">
-        <NavProfile />
-        <MobileMenu openMenu={openMenu} />
-      </div>
+    <nav className=" py-7 pl-14 pr-20 bg-dark-2 transition-all text-light-1">
+      <MobileMenu
+        imageUrl={userData?.image as string}
+        username={userData?.username as string}
+      />
+      <DesktopMenu />
     </nav>
   );
 };

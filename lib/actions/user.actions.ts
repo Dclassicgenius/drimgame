@@ -25,17 +25,19 @@ export async function updateUser({
         id: userId,
       },
       update: {
-        username,
+        username: username.toLowerCase(),
         name,
         bio,
         image,
+        onboarded: true,
       },
       create: {
         id: userId,
-        username,
+        username: username.toLowerCase(),
         name,
         bio,
         image,
+        onboarded: true,
       },
     });
 

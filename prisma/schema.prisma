@@ -68,3 +68,10 @@ model ListGame {
 
   @@id([listId, gameId])
 }
+
+model ApiToken {
+  tokenId     String   @id @default(cuid())
+  accessToken String
+  expiresIn   DateTime
+  addedOn     DateTime @default(now())
+}

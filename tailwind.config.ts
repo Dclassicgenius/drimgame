@@ -248,6 +248,9 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        "anticipated-bg": `url("https://images.igdb.com/igdb/image/upload/t_original/sc6dwv.jpg")`,
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

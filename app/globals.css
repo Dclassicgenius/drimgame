@@ -57,3 +57,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* .gradient-background { background: linear-gradient(15deg, #ffaa00, #ff6a00)};
+
+.gradient-background { background: linear-gradient(15deg, #04ea00, #00d17d)};
+.gradient-background { background: linear-gradient(15deg, #b648ff, #ef5dff)}; */

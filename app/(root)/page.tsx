@@ -1,11 +1,14 @@
-import { UserButton } from "@clerk/nextjs";
+import Anticipated from "@/components/cards/Anticipated";
 
 export default function Home() {
   return (
     <main>
       <h1>Welcome to the dazzling world of games</h1>
-      {/* <UserButton afterSignOutUrl="/" /> */}
-      <p>Sign in to share your favourite games</p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Anticipated />
+        <Anticipated />
+      </div>
     </main>
   );
 }

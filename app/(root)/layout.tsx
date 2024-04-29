@@ -5,6 +5,7 @@ import "../globals.css";
 import Navbar from "@/components/Navigation/Navbar";
 import Footer from "@/components/Navigation/Footer";
 import { ThemeProvider } from "@/components/Theme/theme-provider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +29,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main>
-              <Navbar />
-              <section className="flex min-h-screen flex-1 flex-col items-center bg-dark-1 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10">
-                <div className="w-full max-w-4xl">{children}</div>
-              </section>
-              <Footer />
-            </main>
+            <ReactQueryProvider>
+              <main>
+                <Navbar />
+                <section className="flex min-h-screen  bg-dark-1 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10">
+                  <div className="w-full">{children}</div>
+                </section>
+                <Footer />
+              </main>
+            </ReactQueryProvider>
           </ThemeProvider>
         </body>
       </html>
